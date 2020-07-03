@@ -1,0 +1,32 @@
+.item {
+    width: 29vmin;
+    height: 10vmin;
+    margin-right: 2%;
+
+    text-align: left;
+
+    margin-top: 4vmin;
+}
+
+.group-open {
+    min-height: 60vh !important;
+}
+
+.title-description {
+    color: yellow;
+}
+
+.link-videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.embedded-video {
+    width: 25vw !important;
+    height: 19.8vh !important;
+
+    margin: 1vmin;
+
+    display: inline-block;
+}
