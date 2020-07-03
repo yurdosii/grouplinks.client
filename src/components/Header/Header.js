@@ -36,6 +36,11 @@ class Header extends Component {
                             Login
                         </Button>
 
+                        <Button className="navbar__link"
+                            onClick={this.handleLoginClick}>
+                            Create group
+                        </Button>
+
                     </Toolbar>
                 </AppBar>
             </div>
