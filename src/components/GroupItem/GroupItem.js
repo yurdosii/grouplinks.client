@@ -87,9 +87,9 @@ class GroupItem extends Component {
                 >
                     <DialogTitle id="responsive-dialog-title">
                         {this.props.item.name} 
-                            <Typography variant="body2" component="h3" color="textSecondary" display="inline">
+                        <Typography variant="body2" component="h3" color="textSecondary">
                                  ({this.props.item.description})
-                            </Typography>
+                        </Typography>
                     </DialogTitle>
                     <DialogContent dividers={true}>
                         <div class="link-videos">
