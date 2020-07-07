@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
+import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -15,20 +14,12 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
-
-import './GroupItem.scss';
+import { makeStyles } from '@material-ui/core/styles';
 
 import ReactPlayer from 'react-player/youtube'
 
-// {/* <iframe 
-//                 // width="560" 
-//                 // height="315" 
-//                 // src={"https://www.youtube.com/embed/".concat(item.link.split('?v=')[1])}
-//                 src="https://www.youtube.com/embed/videoseries?list=PLF-NY6ldwAWqSxUpnTBObEP21cFQxNJ7C"
-//                 frameborder="0" 
-//                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
-//                 class="embedded-video">
-//             </iframe> */}
+import './GroupItem.scss';
+
 
 class GroupItem extends Component {
     state = {
@@ -38,10 +29,43 @@ class GroupItem extends Component {
     renderLinks = () => {
         const links = this.props.item.links.map(item =>
 
-            <ReactPlayer url={item.link} 
-                         class="embedded-video"
-                         pip={true}
-            />
+            <div className="link-videos__card">
+                <div className="link-videos__card__video">
+                    <ReactPlayer url={item.link}
+                        class="link-videos__card__video__embedded"
+                        pip={true}
+                        controls={true}
+                        width='100%'
+                        height='100%'
+                    />
+                    {/* <iframe 
+                            // width="560" 
+                            // height="315" 
+                            // src={"https://www.youtube.com/embed/".concat(item.link.split('?v=')[1])}
+                            src=""
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
+                            class="link-video__card__content__embedded-video">
+                        </iframe> */}
+                </div>
+                <div className="link-videos__card__info">
+                    <Typography variant="body2" color="textSecondary" component="p">
+                        {item.description}
+                    </Typography>
+
+                    <Typography variant="body2"
+                        color="textSecondary"
+                        component="p"
+                        className="link-videos__card__info__added">
+                        Added {new Date(item.added).toLocaleString()}
+                    </Typography>
+
+                    <FormControlLabel control={<Checkbox checked={item.is_done} disabled />}
+                        label="done"
+                        className="link-videos__card__info__done"
+                    />
+                </div>
+            </div>
         );
 
         return links
@@ -56,10 +80,9 @@ class GroupItem extends Component {
     };
 
     render() {
-        // TODO Fixed card height
 
-        return(
-            <div className="item">
+        return (
+            <div className="group">
                 <CardActionArea onClick={this.handleClickOpen}>
                     <Card>
                         <CardContent>
@@ -75,33 +98,32 @@ class GroupItem extends Component {
                         </CardContent>
                     </Card>
                 </CardActionArea>
-
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
                     aria-labelledby="responsive-dialog-title"
                     className="group-open"
-                    maxWidth="lg"
+                    maxWidth="xl"
                     fullWidth={true}
                     scroll='paper'
                 >
                     <DialogTitle id="responsive-dialog-title">
-                        {this.props.item.name} 
-                        <Typography variant="body2" component="h3" color="textSecondary">
-                                 ({this.props.item.description})
-                        </Typography>
+                        {this.props.item.name}
+                        <Typography variant="body2" component="h3" color="textSecondary" display="inline">
+                            ({this.props.item.description})
+                            </Typography>
                     </DialogTitle>
                     <DialogContent dividers={true}>
                         <div class="link-videos">
-                            { this.renderLinks() }
+                            {this.renderLinks()}
                         </div>
                     </DialogContent>
                     <DialogActions>
                         <Button autoFocus onClick={this.handleClose} color="primary">
-                            Disagree
+                            Delete
                         </Button>
                         <Button onClick={this.handleClose} color="primary" autoFocus>
-                            Agree
+                            Add link
                         </Button>
                     </DialogActions>
                 </Dialog>
