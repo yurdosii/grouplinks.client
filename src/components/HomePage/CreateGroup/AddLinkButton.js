@@ -55,7 +55,7 @@ class AddLinkButton extends Component {
     }
 
     handleButtonSubmit = () => {
-        this.props.addLink(this.state.link)
+        this.props.addLink(this.state.link);
     }
 
     handleButtonClear = () => {

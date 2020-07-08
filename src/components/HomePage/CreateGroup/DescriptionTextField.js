@@ -11,17 +11,16 @@ class DescriptionTextField extends Component {
 
     render() {
         return (
-
             <TextField
                 margin="dense"
                 label="Description"
+                name="description"
                 type="text"
                 multiline
                 fullWidth
-                value={this.props.description}
-                onBlur={this.onChange}
+                value={this.props.value}
+                onChange={this.onChange}
             />
-
         );
     }
 }
