@@ -31,7 +31,7 @@ class GroupItem extends Component {
 
             <div className="link-videos__card">
                 <div className="link-videos__card__video">
-                    <ReactPlayer url={item.link}
+                    <ReactPlayer url={item.url}
                         class="link-videos__card__video__embedded"
                         pip={true}
                         controls={true}
@@ -41,7 +41,7 @@ class GroupItem extends Component {
                     {/* <iframe 
                             // width="560" 
                             // height="315" 
-                            // src={"https://www.youtube.com/embed/".concat(item.link.split('?v=')[1])}
+                            // src={"https://www.youtube.com/embed/".concat(item.url.split('?v=')[1])}
                             src=""
                             frameborder="0" 
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
