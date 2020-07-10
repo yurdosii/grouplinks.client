@@ -18,6 +18,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import ReactPlayer from 'react-player/youtube'
 
+import CheckboxDisabledField from 'components/Fields/CheckboxDisabledField/CheckboxDisabledField';
+
 import './GroupItem.scss';
 
 
@@ -60,9 +62,9 @@ class GroupItem extends Component {
                         Added {new Date(item.added).toLocaleString()}
                     </Typography>
 
-                    <FormControlLabel control={<Checkbox checked={item.is_done} disabled />}
+                    <CheckboxDisabledField
+                        checked={item.is_done}
                         label="done"
-                        className="link-videos__card__info__done"
                     />
                 </div>
             </div>

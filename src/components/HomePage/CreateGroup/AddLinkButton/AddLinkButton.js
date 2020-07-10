@@ -11,7 +11,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
 import './AddLinkButton.scss';
-import DescriptionTextField from './DescriptionTextField';
+import DescriptionTextField from '../DescriptionTextField/DescriptionTextField';
 
 
 class AddLinkButton extends Component {
@@ -22,7 +22,6 @@ class AddLinkButton extends Component {
             description: '',
             isDone: false
         }
-
     }
 
     handleClickOpen = () => {
@@ -55,7 +54,11 @@ class AddLinkButton extends Component {
     }
 
     handleButtonSubmit = () => {
-        this.props.addLink(this.state.link);
+        const link = {};
+        Object.assign(link, this.state.link);
+        // debugger;
+
+        this.props.addLink(link);
     }
 
     handleButtonClear = () => {
