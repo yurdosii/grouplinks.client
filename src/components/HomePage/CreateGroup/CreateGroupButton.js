@@ -9,10 +9,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import { API_URL, API_VERSION } from '../../../constants';
 import './CreateGroupButton.scss';
-import DescriptionTextField from './DescriptionTextField';
-import NameTextField from './NameTextField';
-import LinksListField from './LinksListField';
-import AddLinkButton from './AddLinkButton';
+import DescriptionTextField from './DescriptionTextField/DescriptionTextField';
+import NameTextField from './NameTextField/NameTextField';
+import LinksListField from './LinksListField/LinksListField';
+import AddLinkButton from './AddLinkButton/AddLinkButton';
 
 
 class CreateGroupButton extends Component {
@@ -52,8 +52,10 @@ class CreateGroupButton extends Component {
     }
 
     addLink = (link) => {
+        // debugger;
+
         let { group } = this.state;
-        group.links.push(link);
+        group.links = group.links.concat(link);
 
         this.setState({ group })
     }
