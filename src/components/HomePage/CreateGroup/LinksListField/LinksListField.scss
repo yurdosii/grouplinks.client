@@ -1,0 +1,11 @@
+.links-list {
+    margin-top: 1rem;
+
+    &__links {
+        &__container {
+            height: 30vh;
+            // min-height: 30vh;
+            // max-height: 30vh;
+        }
+    }
+}
