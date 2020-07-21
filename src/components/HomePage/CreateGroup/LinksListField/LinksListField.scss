@@ -9,3 +9,11 @@
         }
     }
 }
+
+.toolbar {
+    padding-left: 0;
+
+    &__title {
+        flex: 1 1 100%;
+    }
+}
