@@ -25,7 +25,7 @@ class CreateGroupButton extends Component {
             },
             description: '',
             links: []
-        },
+        }
     }
 
     handleClickOpen = () => {
@@ -53,11 +53,30 @@ class CreateGroupButton extends Component {
 
     addLink = (link) => {
         // debugger;
+        link.checked = false;
 
         let { group } = this.state;
         group.links = group.links.concat(link);
 
         this.setState({ group })
+    }
+
+    setLinkChecked = (index) => {
+        let { group } = this.state;
+        group.links[index].checked = !group.links[index].checked;
+        this.setState({ group });
+    }
+
+    setAllLinksChecked = (checked) => {
+        let { group } = this.state;
+        group.links.forEach(link => link.checked = checked);
+        this.setState({ group });
+    }
+
+    deleteLinks = () => {
+        let { group } = this.state;
+        group.links = group.links.filter(item => !item.checked);
+        this.setState({group});
     }
 
     isGroupValid = () => {
@@ -104,7 +123,7 @@ class CreateGroupButton extends Component {
                     axios.post(`${API_URL}/${API_VERSION}/links/`, {
                         url: item.url,
                         description: item.description,
-                        is_done: item.isDone,  // TODO - fix later (is_done => isDone)
+                        is_done: item.isDone,
                         groups: [
                             res.data.id
                         ]
@@ -127,7 +146,7 @@ class CreateGroupButton extends Component {
     }
 
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         return (
             <div className="create-group">
                 <Button
@@ -167,6 +186,9 @@ class CreateGroupButton extends Component {
 
                         <LinksListField
                             links={this.state.group.links}
+                            setLinkChecked={this.setLinkChecked}
+                            deleteLinks={this.deleteLinks}
+                            setAllLinksChecked={this.setAllLinksChecked}
                         />
 
                     </DialogContent>
@@ -178,9 +200,8 @@ class CreateGroupButton extends Component {
                         <Button onClick={this.handleButtonSubmit} color="primary">
                             Create
                         </Button>
-                        {/* <Button onClick={this.handleClose} color="primary">
-                            Create + open to create another
-                        </Button> */}
+                        {/* Create + open to create another */}
+
                     </DialogActions>
                 </Dialog>
 

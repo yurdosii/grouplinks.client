@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Checkbox from '@material-ui/core/Checkbox';
 import Button from '@material-ui/core/Button';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import { useTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/styles';
 
 import ReactPlayer from 'react-player/youtube'
 
@@ -29,11 +22,12 @@ class GroupItem extends Component {
     }
 
     renderLinks = () => {
-        const links = this.props.item.links.map(item =>
+        // console.log(this.props.item.links);
+        const links = this.props.item.links.map(link =>
 
             <div className="link-videos__card">
                 <div className="link-videos__card__video">
-                    <ReactPlayer url={item.url}
+                    <ReactPlayer url={link.url}
                         class="link-videos__card__video__embedded"
                         pip={true}
                         controls={true}
@@ -43,7 +37,7 @@ class GroupItem extends Component {
                     {/* <iframe 
                             // width="560" 
                             // height="315" 
-                            // src={"https://www.youtube.com/embed/".concat(item.url.split('?v=')[1])}
+                            // src={"https://www.youtube.com/embed/".concat(link.url.split('?v=')[1])}
                             src=""
                             frameborder="0" 
                             allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen
@@ -52,18 +46,18 @@ class GroupItem extends Component {
                 </div>
                 <div className="link-videos__card__info">
                     <Typography variant="body2" color="textSecondary" component="p">
-                        {item.description}
+                        {link.description}
                     </Typography>
 
                     <Typography variant="body2"
                         color="textSecondary"
                         component="p"
                         className="link-videos__card__info__added">
-                        Added {new Date(item.added).toLocaleString()}
+                        Added {new Date(link.added).toLocaleString()}
                     </Typography>
 
                     <CheckboxDisabledField
-                        checked={item.is_done}
+                        checked={link.isDone}
                         label="done"
                     />
                 </div>

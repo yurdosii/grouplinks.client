@@ -33,7 +33,7 @@ class HomePage extends Component {
     }
 
     render() {
-        console.log(this.state);
+        // console.log(this.state);
         return (
             <div className="content">
                 <div className="content__title">
