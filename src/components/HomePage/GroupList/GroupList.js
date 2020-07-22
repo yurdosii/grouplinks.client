@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 import GroupItem from './GroupItem/GroupItem';
-import './GroupList.scss';
+import classes from './GroupList.module.scss';
 
 
 class GroupList extends Component {
@@ -18,7 +18,7 @@ class GroupList extends Component {
 
     render() {
         return(
-            <div className="groups">
+            <div className={classes.groups}>
                 { this.renderItems() }
             </div>
         );
