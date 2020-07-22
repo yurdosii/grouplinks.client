@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
+// import FilterListIcon from '@material-ui/icons/FilterList';
 import './LinksListField.scss';
 
 import CheckboxDisabledField from 'components/Fields/CheckboxDisabledField/CheckboxDisabledField';
@@ -61,7 +61,12 @@ class LinksListField extends Component {
         const selectedNum = this.state.checkedLinksIndexes.length;
         if (selectedNum > 0) {
             content.push(
-                <Typography className="toolbar__title" color="inherit" variant="subtitle1" component="div">
+                <Typography
+                    className="toolbar__title"
+                    color="inherit"
+                    variant="subtitle1"
+                    component="div"
+                >
                     {selectedNum} selected
                 </Typography>
             );
@@ -74,7 +79,11 @@ class LinksListField extends Component {
             );
         } else {
             content.push(
-                <Typography className="toolbar__title" variant="h6" component="div">
+                <Typography 
+                    className="toolbar__title" 
+                    variant="h6" 
+                    component="div"
+                >
                     Links
                 </Typography>
             )

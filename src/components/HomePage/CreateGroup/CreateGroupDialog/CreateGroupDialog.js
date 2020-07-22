@@ -139,7 +139,7 @@ class CreateGroupDialog extends Component {
             <Dialog
                 open={this.props.open}
                 onClose={this.props.handleClose}
-                className="create-group__dialog"
+                className="dialog"
                 maxWidth="md"
             >
                 <DialogTitle>
