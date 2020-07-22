@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import GroupList from '../GroupList/GroupList';
+import GroupList from './GroupList/GroupList';
 import CreateGroupButton from './CreateGroup/CreateGroupButton';
 
 import { API_URL, API_VERSION } from 'constants/index';
