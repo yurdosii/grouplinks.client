@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import GroupItem from '../GroupItem/GroupItem';
+import GroupItem from './GroupItem/GroupItem';
 import './GroupList.scss';
 
 
