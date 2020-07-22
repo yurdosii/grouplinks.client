@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import GroupList from './GroupList/GroupList';
-import CreateGroupButton from './CreateGroup/CreateGroupButton';
+import CreateGroup from './CreateGroup/CreateGroup';
 
 import { API_URL, API_VERSION } from 'constants/index';
 import './HomePage.scss';
@@ -40,7 +40,7 @@ class HomePage extends Component {
                     Your groups
                 </div>
 
-                <CreateGroupButton getData={this.getData} />
+                <CreateGroup getData={this.getData} />
 
                 <GroupList groups={this.state.groups}
                     onGroupOpenClick={this.handleGroupOpenClick}

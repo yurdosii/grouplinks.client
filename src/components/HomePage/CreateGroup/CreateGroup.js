@@ -7,15 +7,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import './CreateGroup.scss';
+import { API_URL, API_VERSION } from 'constants/index';
 import DescriptionTextField from 'components/Fields/DescriptionTextField/DescriptionTextField';
 import NameTextField from 'components/Fields/NameTextField/NameTextField';
 import LinksListField from './LinksListField/LinksListField';
 import AddLinkButton from './AddLinkButton/AddLinkButton';
-import { API_URL, API_VERSION } from 'constants/index';
-import './CreateGroupButton.scss';
+import CreateGroupButton from './CreateGroupButton/CreateGroupButton';
 
 
-class CreateGroupButton extends Component {
+class CreateGroup extends Component {
     state = {
         open: false,
         group: {
@@ -149,14 +150,8 @@ class CreateGroupButton extends Component {
         // console.log(this.state);
         return (
             <div className="create-group">
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={this.handleClickOpen}
-                    className="create-group__button"
-                >
-                    Create group
-                </Button>
+
+                <CreateGroupButton handleClickOpen={this.handleClickOpen}/>
 
                 <Dialog
                     open={this.state.open}
@@ -210,4 +205,4 @@ class CreateGroupButton extends Component {
     }
 }
 
-export default CreateGroupButton;
+export default CreateGroup;
