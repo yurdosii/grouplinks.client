@@ -100,7 +100,7 @@ class CreateGroupDialog extends Component {
 
         if (isValid) {
             axios.post(`${API_URL}/${API_VERSION}/groups/`, {
-                name: this.state.group.name.value,
+                name: this.state.group.name.value.trim(),
                 description: this.state.group.description.trim()
             }, {
                 // withCredentials: true,

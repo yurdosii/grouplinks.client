@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 class NameTextField extends Component {
 
     onChange = (event) => {
-        const name = event.target.value.trim();
+        const name = event.target.value;
         const error = !this.isValid(name);
 
         this.props.setName(name, error);
