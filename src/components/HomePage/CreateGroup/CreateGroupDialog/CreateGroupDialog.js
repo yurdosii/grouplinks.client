@@ -12,7 +12,7 @@ import { API_URL, API_VERSION } from 'constants/index';
 import DescriptionTextField from 'components/Fields/DescriptionTextField/DescriptionTextField';
 import NameTextField from 'components/Fields/NameTextField/NameTextField';
 import LinksListField from './LinksListField/LinksListField';
-import AddLinkButton from './AddLinkButton/AddLinkButton';
+import AddLink from './AddLink/AddLink';
 
 
 class CreateGroupDialog extends Component {
@@ -171,7 +171,7 @@ class CreateGroupDialog extends Component {
                 </DialogContent>
 
                 <DialogActions>
-                    <AddLinkButton
+                    <AddLink
                         addLink={this.addLink}
                     />
 
