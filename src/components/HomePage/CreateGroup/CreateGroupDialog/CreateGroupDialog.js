@@ -7,17 +7,16 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { API_URL, API_VERSION } from '../../../constants';
-import './CreateGroupButton.scss';
-import DescriptionTextField from './DescriptionTextField/DescriptionTextField';
-import NameTextField from './NameTextField/NameTextField';
+import './CreateGroupDialog.scss';
+import { API_URL, API_VERSION } from 'constants/index';
+import DescriptionTextField from 'components/Fields/DescriptionTextField/DescriptionTextField';
+import NameTextField from 'components/Fields/NameTextField/NameTextField';
 import LinksListField from './LinksListField/LinksListField';
-import AddLinkButton from './AddLinkButton/AddLinkButton';
+import AddLink from './AddLink/AddLink';
 
 
-class CreateGroupButton extends Component {
+class CreateGroupDialog extends Component {
     state = {
-        open: false,
         group: {
             name: {
                 value: '',
@@ -27,14 +26,6 @@ class CreateGroupButton extends Component {
             links: []
         }
     }
-
-    handleClickOpen = () => {
-        this.setState({ open: true });
-    };
-
-    handleClose = () => {
-        this.setState({ open: false });
-    };
 
     setName = (name, error) => {
         let { group } = this.state;
@@ -53,8 +44,6 @@ class CreateGroupButton extends Component {
 
     addLink = (link) => {
         // debugger;
-        link.checked = false;
-
         let { group } = this.state;
         group.links = group.links.concat(link);
 
@@ -76,7 +65,7 @@ class CreateGroupButton extends Component {
     deleteLinks = () => {
         let { group } = this.state;
         group.links = group.links.filter(item => !item.checked);
-        this.setState({group});
+        this.setState({ group });
     }
 
     isGroupValid = () => {
@@ -107,7 +96,6 @@ class CreateGroupButton extends Component {
     }
 
     handleButtonSubmit = () => {
-
         const isValid = this.isGroupValid();
 
         if (isValid) {
@@ -134,7 +122,7 @@ class CreateGroupButton extends Component {
                     }).catch(error => {
                         console.log(error);
                     })
-                })
+                });
 
                 this.clearFields();
                 this.props.getData();
@@ -148,66 +136,56 @@ class CreateGroupButton extends Component {
     render() {
         // console.log(this.state);
         return (
-            <div className="create-group">
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={this.handleClickOpen}
-                    className="create-group__button"
-                >
-                    Create group
-                </Button>
+            <Dialog
+                open={this.props.open}
+                onClose={this.props.handleClose}
+                className="dialog"
+                maxWidth="md"
+            >
+                <DialogTitle>
+                    Create new group
+                </DialogTitle>
 
-                <Dialog
-                    open={this.state.open}
-                    onClose={this.handleClose}
-                    className="create-group__dialog"
-                    maxWidth="md"
-                >
-                    <DialogTitle>
-                        Create new group
-                    </DialogTitle>
+                <DialogContent>
+                    <DialogContentText>
+                        To create group, please enter group name, description (optional), group links (optional)
+                    </DialogContentText>
 
-                    <DialogContent>
-                        <DialogContentText>
-                            To create group, please enter group name, description (optional), group links (optional)
-                        </DialogContentText>
+                    <NameTextField
+                        error={this.state.group.name.error}
+                        value={this.state.group.name.value}
+                        setName={this.setName}
+                    />
 
-                        <NameTextField
-                            error={this.state.group.name.error}
-                            value={this.state.group.name.value}
-                            setName={this.setName}
-                        />
+                    <DescriptionTextField
+                        value={this.state.group.description}
+                        setDescription={this.setDescription}
+                    />
 
-                        <DescriptionTextField
-                            value={this.state.group.description}
-                            setDescription={this.setDescription}
-                        />
+                    <LinksListField
+                        links={this.state.group.links}
+                        setLinkChecked={this.setLinkChecked}
+                        deleteLinks={this.deleteLinks}
+                        setAllLinksChecked={this.setAllLinksChecked}
+                    />
+                </DialogContent>
 
-                        <LinksListField
-                            links={this.state.group.links}
-                            setLinkChecked={this.setLinkChecked}
-                            deleteLinks={this.deleteLinks}
-                            setAllLinksChecked={this.setAllLinksChecked}
-                        />
+                <DialogActions>
+                    <AddLink
+                        addLink={this.addLink}
+                    />
 
-                    </DialogContent>
-
-                    <DialogActions>
-
-                        <AddLinkButton addLink={this.addLink} />
-
-                        <Button onClick={this.handleButtonSubmit} color="primary">
-                            Create
-                        </Button>
-                        {/* Create + open to create another */}
-
-                    </DialogActions>
-                </Dialog>
-
-            </div>
+                    <Button
+                        onClick={this.handleButtonSubmit}
+                        color="primary"
+                    >
+                        Create
+                    </Button>
+                    {/* Create + open to create another */}
+                </DialogActions>
+            </Dialog>
         );
     }
 }
 
-export default CreateGroupButton;
+export default CreateGroupDialog;
