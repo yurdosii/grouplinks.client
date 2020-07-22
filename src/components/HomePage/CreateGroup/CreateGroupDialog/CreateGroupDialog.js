@@ -100,8 +100,8 @@ class CreateGroupDialog extends Component {
 
         if (isValid) {
             axios.post(`${API_URL}/${API_VERSION}/groups/`, {
-                name: this.state.group.name.value,
-                description: this.state.group.description
+                name: this.state.group.name.value.trim(),
+                description: this.state.group.description.trim()
             }, {
                 // withCredentials: true,
             }).then(res => {
@@ -110,7 +110,7 @@ class CreateGroupDialog extends Component {
                 this.state.group.links.forEach(item => {
                     axios.post(`${API_URL}/${API_VERSION}/links/`, {
                         url: item.url,
-                        description: item.description,
+                        description: item.description.trim(),
                         is_done: item.isDone,
                         groups: [
                             res.data.id
