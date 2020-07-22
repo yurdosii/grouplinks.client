@@ -5,7 +5,7 @@ import TextField from '@material-ui/core/TextField';
 class DescriptionTextField extends Component {
 
     onChange = (event) => {
-        const description = event.target.value.trim();
+        const description = event.target.value;
         this.props.setDescription(description);
     }
 
