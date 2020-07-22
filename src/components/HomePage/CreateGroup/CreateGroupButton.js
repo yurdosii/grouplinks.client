@@ -7,12 +7,12 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import { API_URL, API_VERSION } from '../../../constants';
-import './CreateGroupButton.scss';
-import DescriptionTextField from './DescriptionTextField/DescriptionTextField';
-import NameTextField from './NameTextField/NameTextField';
+import DescriptionTextField from 'components/Fields/DescriptionTextField/DescriptionTextField';
+import NameTextField from 'components/Fields/NameTextField/NameTextField';
 import LinksListField from './LinksListField/LinksListField';
 import AddLinkButton from './AddLinkButton/AddLinkButton';
+import { API_URL, API_VERSION } from 'constants/index';
+import './CreateGroupButton.scss';
 
 
 class CreateGroupButton extends Component {
@@ -76,7 +76,7 @@ class CreateGroupButton extends Component {
     deleteLinks = () => {
         let { group } = this.state;
         group.links = group.links.filter(item => !item.checked);
-        this.setState({group});
+        this.setState({ group });
     }
 
     isGroupValid = () => {

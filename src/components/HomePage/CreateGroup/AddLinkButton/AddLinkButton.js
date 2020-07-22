@@ -10,8 +10,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import TextField from '@material-ui/core/TextField';
 
+import DescriptionTextField from 'components/Fields/DescriptionTextField/DescriptionTextField'; 
 import './AddLinkButton.scss';
-import DescriptionTextField from '../DescriptionTextField/DescriptionTextField';
 
 
 class AddLinkButton extends Component {
