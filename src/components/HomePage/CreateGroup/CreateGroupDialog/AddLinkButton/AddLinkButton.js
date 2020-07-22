@@ -56,6 +56,7 @@ class AddLinkButton extends Component {
     handleButtonSubmit = () => {
         const link = {};
         Object.assign(link, this.state.link);
+        link.checked = false;
         // debugger;
 
         this.props.addLink(link);
