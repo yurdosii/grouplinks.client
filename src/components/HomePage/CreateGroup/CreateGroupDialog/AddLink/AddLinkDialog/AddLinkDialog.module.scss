@@ -6,3 +6,13 @@
         color: rgba(117, 82, 212, 1) !important;
     }
 }
+
+.url_field_input {
+    &::after {
+        border-bottom: 2px solid #7552d4 !important;
+    }
+}
+
+.url_field_label__focused {
+    color: #7552d4 !important;
+}

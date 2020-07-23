@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 
+import classes from './DescriptionTextField.module.scss';
+
 
 class DescriptionTextField extends Component {
 
@@ -20,6 +22,14 @@ class DescriptionTextField extends Component {
                 fullWidth
                 value={this.props.value}
                 onChange={this.onChange}
+                InputProps={{
+                    className: classes.input
+                }}
+                InputLabelProps={{
+                    classes: {
+                        focused: classes.label__focused
+                    }
+                }}
             />
         );
     }
