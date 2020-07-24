@@ -79,8 +79,8 @@ class GroupItem extends Component {
 
         return (
             <div className="group">
-                <CardActionArea onClick={this.handleClickOpen}>
-                    <Card>
+                    <Card className="group__card">
+                    <CardActionArea onClick={this.handleClickOpen}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
                                 {this.props.item.name}
@@ -92,8 +92,9 @@ class GroupItem extends Component {
                                 Links: {this.props.item.links.length}
                             </Typography>
                         </CardContent>
+                        </CardActionArea>
                     </Card>
-                </CardActionArea>
+                
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -104,10 +105,10 @@ class GroupItem extends Component {
                     scroll='paper'
                 >
                     <DialogTitle id="responsive-dialog-title">
-                        {this.props.item.name}
+                        {this.props.item.name} {<br/>}
                         <Typography variant="body2" component="h3" color="textSecondary" display="inline">
                             ({this.props.item.description})
-                            </Typography>
+                        </Typography>
                     </DialogTitle>
                     <DialogContent dividers={true}>
                         <div class="link-videos">
