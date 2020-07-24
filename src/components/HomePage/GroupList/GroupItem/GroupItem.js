@@ -79,7 +79,7 @@ class GroupItem extends Component {
 
         return (
             <div className="group">
-                    <Card className="group__card">
+                <Card className="group__card">
                     <CardActionArea onClick={this.handleClickOpen}>
                         <CardContent>
                             <Typography gutterBottom variant="h5" component="h2">
@@ -92,8 +92,8 @@ class GroupItem extends Component {
                                 Links: {this.props.item.links.length}
                             </Typography>
                         </CardContent>
-                        </CardActionArea>
-                    </Card>
+                    </CardActionArea>
+                </Card>
                 
                 <Dialog
                     open={this.state.open}
