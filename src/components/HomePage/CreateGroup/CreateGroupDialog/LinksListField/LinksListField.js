@@ -13,8 +13,8 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
 // import FilterListIcon from '@material-ui/icons/FilterList';
-import './LinksListField.scss';
 
+import classes from './LinksListField.module.scss';
 import CheckboxDisabledField from 'components/Fields/CheckboxDisabledField/CheckboxDisabledField';
 
 
@@ -62,12 +62,14 @@ class LinksListField extends Component {
         if (selectedNum > 0) {
             content.push(
                 <Typography
-                    className="toolbar__title"
+                    className={classes.toolbar__title}
                     color="inherit"
-                    variant="subtitle1"
+                    // variant="subtitle1"
+                    // component="div"
+                    variant="h6"
                     component="div"
                 >
-                    {selectedNum} selected
+                    Links ({selectedNum} selected)
                 </Typography>
             );
             content.push(
@@ -79,9 +81,9 @@ class LinksListField extends Component {
             );
         } else {
             content.push(
-                <Typography 
-                    className="toolbar__title" 
-                    variant="h6" 
+                <Typography
+                    className={classes.toolbar__title}
+                    variant="h6"
                     component="div"
                 >
                     Links
@@ -116,7 +118,10 @@ class LinksListField extends Component {
                 tabIndex={-1}
                 selected={row.checked}
             >
-                <TableCell padding="checkbox">
+                <TableCell
+                    padding="checkbox"
+                    classes={{ sizeSmall: classes.cell_small }}
+                >
                     <Checkbox
                         checked={row.checked}
                     />
@@ -137,34 +142,30 @@ class LinksListField extends Component {
     render() {
         console.log(this.props);
         return (
-            <div className="links-list">
-                <div className="links-list__title">
-                    Links
-                </div>
-                <div className="links-list__links">
-                    <Paper>
-                        <Toolbar className="toolbar">
-                            {this.renderTableToolbarContent()}
-                        </Toolbar>
-                        <TableContainer className="links-list__links__container">
-                            <Table stickyHeader size="small">
-                                <TableHead>
-                                    <TableRow>
-                                        <TableCell padding="checkbox">
-                                            {this.renderAllCheckbox()}
-                                        </TableCell>
-                                        <TableCell align="left">URL</TableCell>
-                                        <TableCell align="left">Description</TableCell>
-                                        <TableCell align="left">Done</TableCell>
-                                    </TableRow>
-                                </TableHead>
-                                <TableBody>
-                                    {this.renderTableRows()}
-                                </TableBody>
-                            </Table>
-                        </TableContainer>
-                    </Paper>
-                </div>
+            <div className={classes.links_list}>
+                <Toolbar className={classes.toolbar}>
+                    {this.renderTableToolbarContent()}
+                </Toolbar>
+                <TableContainer className={classes.links_list__container}>
+                    <Table stickyHeader size="small">
+                        <TableHead>
+                            <TableRow>
+                                <TableCell
+                                    padding="checkbox"
+                                    classes={{ sizeSmall: classes.cell_small }}
+                                >
+                                    {this.renderAllCheckbox()}
+                                </TableCell>
+                                <TableCell align="left">URL</TableCell>
+                                <TableCell align="left">Description</TableCell>
+                                <TableCell align="left">Done</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            {this.renderTableRows()}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
             </div>
         );
     }

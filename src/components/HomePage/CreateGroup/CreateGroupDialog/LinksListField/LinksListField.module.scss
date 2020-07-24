@@ -1,0 +1,26 @@
+.links_list {
+    margin-top: 0.3rem;
+}
+
+.links_list__container {
+    height: 30vh;
+    // min-height: 30vh;
+    // max-height: 30vh;
+}
+
+
+.toolbar {
+    padding-left: 0 !important;
+    padding-right: 0.8vw !important;  // 0.6vw
+}
+
+.toolbar__title {
+    flex: 1 1 100%;
+
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+}
+
+.cell_small {
+    padding-left: 0 !important;
+}
