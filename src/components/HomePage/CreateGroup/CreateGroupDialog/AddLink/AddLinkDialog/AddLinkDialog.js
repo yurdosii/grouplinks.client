@@ -92,6 +92,14 @@ class AddLinkDialog extends Component {
                         // error={true}
                         value={this.state.link.url}
                         onChange={this.onUrlChange}
+                        InputProps={{
+                            className: classes.url_field_input
+                        }}
+                        InputLabelProps={{
+                            classes: {
+                                focused: classes.url_field_label__focused
+                            }
+                        }}
                     />
 
                     <DescriptionTextField

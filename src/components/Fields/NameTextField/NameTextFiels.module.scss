@@ -1,0 +1,9 @@
+.input {
+    &::after {
+        border-bottom: 2px solid #7552d4 !important;
+    }
+}
+
+.label__focused {
+    color: #7552d4 !important;
+}

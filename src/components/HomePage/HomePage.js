@@ -4,7 +4,7 @@ import GroupList from './GroupList/GroupList';
 import CreateGroup from './CreateGroup/CreateGroup';
 
 import { API_URL, API_VERSION } from 'constants/index';
-import './HomePage.scss';
+import classes from './HomePage.module.scss';
 
 
 class HomePage extends Component {
@@ -35,12 +35,14 @@ class HomePage extends Component {
     render() {
         // console.log(this.state);
         return (
-            <div className="content">
-                <div className="content__title">
+            <div className={classes.content}>
+                <CreateGroup
+                    getData={this.getData}
+                />
+
+                <div className={classes.title}>
                     Your groups
                 </div>
-
-                <CreateGroup getData={this.getData} />
 
                 <GroupList groups={this.state.groups}
                     onGroupOpenClick={this.handleGroupOpenClick}

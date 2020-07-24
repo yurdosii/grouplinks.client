@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 
+import classes from './NameTextFiels.module.scss';
+
 
 class NameTextField extends Component {
 
@@ -33,6 +35,14 @@ class NameTextField extends Component {
                 error={this.props.error}
                 value={this.props.value}
                 onChange={this.onChange}
+                InputProps={{
+                    className: classes.input
+                }}
+                InputLabelProps={{
+                    classes: {
+                        focused: classes.label__focused
+                    }
+                }}
             />
         );
     }
