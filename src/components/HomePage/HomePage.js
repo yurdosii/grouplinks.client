@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import GroupList from './GroupList/GroupList';
 import CreateGroup from './CreateGroup/CreateGroup';
+import Button from '@material-ui/core/Button';
 
-import { API_URL, API_VERSION } from 'constants/index';
+import { API_URL, API_VERSION, GOOGLE_AUTH_URL, MAIN_PAGE_URL } from 'constants/index';
 import classes from './HomePage.module.scss';
+
 
 
 class HomePage extends Component {
@@ -14,7 +16,7 @@ class HomePage extends Component {
 
     getData = () => {
         axios.get(`${API_URL}/${API_VERSION}/groups/`, {
-            // withCredentials: true,
+            withCredentials: true,
         }).then(res => {
             console.log(res);
             const groups = res.data;
@@ -22,6 +24,10 @@ class HomePage extends Component {
         }).catch(error => {
             console.log(error);
         })
+    }
+
+    login = () => {
+        window.location.href = `${GOOGLE_AUTH_URL}?main_page_url=${MAIN_PAGE_URL}`
     }
 
     handleGroupOpenClick = (group_id) => {
@@ -36,6 +42,15 @@ class HomePage extends Component {
         // console.log(this.state);
         return (
             <div className={classes.content}>
+
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={this.login}
+                >
+                    Login
+                </Button>
+
                 <CreateGroup
                     getData={this.getData}
                 />
