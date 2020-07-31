@@ -4,14 +4,28 @@ import GroupList from './GroupList/GroupList';
 import CreateGroup from './CreateGroup/CreateGroup';
 import Button from '@material-ui/core/Button';
 
-import { API_URL, API_VERSION, GOOGLE_AUTH_URL, MAIN_PAGE_URL } from 'constants/index';
+import { API_URL, API_VERSION, SERVER_HOST } from 'constants/index';
 import classes from './HomePage.module.scss';
-
+import LoginButton from './Auth/LoginButton/LoginButton';
+import LogoutButton from './Auth/LogoutButton/LogoutButton';
 
 
 class HomePage extends Component {
     state = {
+        login: false,
         groups: []
+    }
+
+    checkLogin = () => {
+        axios.get(`${SERVER_HOST}/check_login/`, {
+            withCredentials: true,
+        }).then(res => {
+            console.log(res);
+            this.setState({login: res.data.login});
+        }).catch(error => {
+            console.log(error);
+            // this.setState({login: false});
+        })
     }
 
     getData = () => {
@@ -23,18 +37,38 @@ class HomePage extends Component {
             this.setState({ groups })
         }).catch(error => {
             console.log(error);
-        })
+        });
     }
 
-    login = () => {
-        window.location.href = `${GOOGLE_AUTH_URL}?main_page_url=${MAIN_PAGE_URL}`
+    onLogoutClick = () => {
+        axios.get(`${SERVER_HOST}/auth/logout`, {
+            withCredentials: true,
+        }).then(res => {
+            console.log(res);
+            this.setState({login: false, groups: []});
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     handleGroupOpenClick = (group_id) => {
         this.props.history.push(`/groups/${group_id}`)
     }
 
+    renderAuthButton = () => {
+        let button = null;
+
+        if (this.state.login) {
+            button = <LogoutButton onLogoutClick={this.onLogoutClick} />
+        } else {
+            button = <LoginButton />
+        }
+
+        return button;
+    }
+
     componentDidMount() {
+        this.checkLogin();
         this.getData();
     }
 
@@ -43,13 +77,7 @@ class HomePage extends Component {
         return (
             <div className={classes.content}>
 
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={this.login}
-                >
-                    Login
-                </Button>
+                {this.renderAuthButton()}
 
                 <CreateGroup
                     getData={this.getData}
