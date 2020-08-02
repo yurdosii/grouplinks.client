@@ -103,7 +103,9 @@ class CreateGroupDialog extends Component {
                 name: this.state.group.name.value.trim(),
                 description: this.state.group.description.trim()
             }, {
-                // withCredentials: true,
+                withCredentials: true,
+                xsrfCookieName: 'csrftoken',
+                xsrfHeaderName: 'X-CSRFToken',
             }).then(res => {
                 console.log(res);
 
@@ -111,12 +113,14 @@ class CreateGroupDialog extends Component {
                     axios.post(`${API_URL}/${API_VERSION}/links/`, {
                         url: item.url,
                         description: item.description.trim(),
-                        is_done: item.isDone,
+                        isDone: item.isDone,
                         groups: [
                             res.data.id
                         ]
                     }, {
-                        // withCredentials: true,
+                        withCredentials: true,
+                        xsrfCookieName: 'csrftoken',
+                        xsrfHeaderName: 'X-CSRFToken',
                     }).then(res => {
                         console.log(res);
                     }).catch(error => {
