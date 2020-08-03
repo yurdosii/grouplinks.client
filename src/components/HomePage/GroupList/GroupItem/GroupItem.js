@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -11,9 +12,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 import ReactPlayer from 'react-player/youtube'
 
-import CheckboxDisabledField from 'components/Fields/CheckboxDisabledField/CheckboxDisabledField';
-
 import './GroupItem.scss';
+import { API_URL, API_VERSION } from 'constants/index';
+import CheckboxDisabledField from 'components/Fields/CheckboxDisabledField/CheckboxDisabledField';
+import DeleteGroup from './DeleteGroup/DeleteGroup';
 
 
 class GroupItem extends Component {
@@ -75,6 +77,24 @@ class GroupItem extends Component {
         this.setState({ open: false });
     };
 
+    deleteGroup = () => {
+        axios.delete(`${API_URL}/${API_VERSION}/groups/${this.props.item.id}`, {
+            withCredentials: true,
+            xsrfCookieName: 'csrftoken',
+            xsrfHeaderName: 'X-CSRFToken',
+        }).then(res => {
+            console.log(res);
+
+            this.handleClose();
+            this.props.getData();
+
+        }).catch(error => {
+            console.log(error);
+        })
+
+        // закрий групу бо вона буде видалена
+    }
+
     render() {
 
         return (
@@ -94,7 +114,7 @@ class GroupItem extends Component {
                         </CardContent>
                     </CardActionArea>
                 </Card>
-                
+
                 <Dialog
                     open={this.state.open}
                     onClose={this.handleClose}
@@ -105,20 +125,23 @@ class GroupItem extends Component {
                     scroll='paper'
                 >
                     <DialogTitle id="responsive-dialog-title">
-                        {this.props.item.name} {<br/>}
+                        {this.props.item.name} {<br />}
                         <Typography variant="body2" component="h3" color="textSecondary" display="inline">
                             ({this.props.item.description})
                         </Typography>
                     </DialogTitle>
                     <DialogContent dividers={true}>
-                        <div class="link-videos">
+                        <div className="link-videos">
                             {this.renderLinks()}
                         </div>
                     </DialogContent>
                     <DialogActions>
-                        <Button autoFocus onClick={this.handleClose} color="primary">
-                            Delete
-                        </Button>
+
+                        <DeleteGroup 
+                            deleteGroup={this.deleteGroup}
+                            item={this.props.item}
+                        />
+
                         <Button onClick={this.handleClose} color="primary" autoFocus>
                             Add link
                         </Button>
