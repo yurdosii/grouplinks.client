@@ -87,8 +87,10 @@ class HomePage extends Component {
                     Your groups
                 </div>
 
-                <GroupList groups={this.state.groups}
+                <GroupList
+                    groups={this.state.groups}
                     onGroupOpenClick={this.handleGroupOpenClick}
+                    getData={this.getData}
                 />
             </div>
         );
