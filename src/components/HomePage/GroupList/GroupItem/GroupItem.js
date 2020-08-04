@@ -96,10 +96,6 @@ class GroupItem extends Component {
     }
 
     addLink = (link) => {
-        console.log('Add link');
-        console.log(this.props);
-        console.log(link);
-
         axios.post(`${API_URL}/${API_VERSION}/links/`,{
             url: link.url.trim(),
             description: link.description.trim(),

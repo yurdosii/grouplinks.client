@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import Button from '@material-ui/core/Button';
 import classes from './AddLinkButton.module.scss';
+import Button from '@material-ui/core/Button';
 
 
 class AddLinkButton extends Component {
