@@ -7,7 +7,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import './CreateGroupDialog.scss';
+import classes from './CreateGroupDialog.module.scss';
 import { API_URL, API_VERSION } from 'constants/index';
 import DescriptionTextField from 'components/Fields/DescriptionTextField/DescriptionTextField';
 import NameTextField from 'components/Fields/NameTextField/NameTextField';
@@ -111,12 +111,10 @@ class CreateGroupDialog extends Component {
 
                 this.state.group.links.forEach(item => {
                     axios.post(`${API_URL}/${API_VERSION}/links/`, {
-                        url: item.url,
+                        url: item.url.trim(),
                         description: item.description.trim(),
                         isDone: item.isDone,
-                        groups: [
-                            res.data.id
-                        ]
+                        group: res.data.id
                     }, {
                         withCredentials: true,
                         xsrfCookieName: 'csrftoken',
@@ -182,6 +180,7 @@ class CreateGroupDialog extends Component {
                     <Button
                         onClick={this.handleButtonSubmit}
                         color="primary"
+                        className={classes.createButton}
                     >
                         Create
                     </Button>
