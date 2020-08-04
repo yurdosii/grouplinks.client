@@ -15,6 +15,7 @@ import './GroupItem.scss';
 import { API_URL, API_VERSION } from 'constants/index';
 import CheckboxDisabledField from 'components/Fields/CheckboxDisabledField/CheckboxDisabledField';
 import DeleteGroup from './DeleteGroup/DeleteGroup';
+import DeleteLink from './DeleteLink/DeleteLink';
 import AddLink from 'components/HomePage/CreateGroup/CreateGroupDialog/AddLink/AddLink';
 
 
@@ -63,10 +64,15 @@ class GroupItem extends Component {
                         label="done"
                     />
                 </div>
+
+                <DeleteLink 
+                    deleteLink={this.deleteLink}
+                    link={link}
+                />
             </div>
         );
 
-        return links
+        return links;
     }
 
     handleClickOpen = () => {
@@ -91,8 +97,6 @@ class GroupItem extends Component {
         }).catch(error => {
             console.log(error);
         })
-
-        // закрий групу бо вона буде видалена
     }
 
     addLink = (link) => {
@@ -107,6 +111,22 @@ class GroupItem extends Component {
             xsrfHeaderName: 'X-CSRFToken',
         }).then(res => {
             console.log(res);
+            this.props.getData();
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
+    deleteLink = (id) => {
+        // TODO - move this method in LinkItem in future 
+        axios.delete(`${API_URL}/${API_VERSION}/links/${id}`, {
+            withCredentials: true,
+            xsrfCookieName: 'csrftoken',
+            xsrfHeaderName: 'X-CSRFToken',
+        }).then(res => {
+            console.log(res);
+
+            this.handleClose();
             this.props.getData();
         }).catch(error => {
             console.log(error);
