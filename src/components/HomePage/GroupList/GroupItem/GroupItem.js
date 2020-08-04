@@ -3,7 +3,6 @@ import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -16,6 +15,7 @@ import './GroupItem.scss';
 import { API_URL, API_VERSION } from 'constants/index';
 import CheckboxDisabledField from 'components/Fields/CheckboxDisabledField/CheckboxDisabledField';
 import DeleteGroup from './DeleteGroup/DeleteGroup';
+import AddLink from 'components/HomePage/CreateGroup/CreateGroupDialog/AddLink/AddLink';
 
 
 class GroupItem extends Component {
@@ -95,6 +95,28 @@ class GroupItem extends Component {
         // закрий групу бо вона буде видалена
     }
 
+    addLink = (link) => {
+        console.log('Add link');
+        console.log(this.props);
+        console.log(link);
+
+        axios.post(`${API_URL}/${API_VERSION}/links/`,{
+            url: link.url.trim(),
+            description: link.description.trim(),
+            isDone: link.isDone,
+            group: this.props.item.id
+        }, {
+            withCredentials: true,
+            xsrfCookieName: 'csrftoken',
+            xsrfHeaderName: 'X-CSRFToken',
+        }).then(res => {
+            console.log(res);
+            this.props.getData();
+        }).catch(error => {
+            console.log(error);
+        })
+    }
+
     render() {
 
         return (
@@ -136,15 +158,14 @@ class GroupItem extends Component {
                         </div>
                     </DialogContent>
                     <DialogActions>
-
                         <DeleteGroup 
                             deleteGroup={this.deleteGroup}
                             item={this.props.item}
                         />
-
-                        <Button onClick={this.handleClose} color="primary" autoFocus>
-                            Add link
-                        </Button>
+                        <AddLink 
+                            addLink={this.addLink}
+                            autoFocus
+                        />
                     </DialogActions>
                 </Dialog>
 
