@@ -1,0 +1,15 @@
+.button {
+    color:  white !important;
+    text-transform: capitalize !important;
+    background-color: #CC2936BA !important;
+
+    line-height: 1.43 !important;
+    letter-spacing: 0.01071em !important;
+    padding-left: 3vmin !important;
+    padding-right: 3vmin !important;
+
+    &:hover {
+        background-color: #CC2936 !important;
+    }
+}
+
