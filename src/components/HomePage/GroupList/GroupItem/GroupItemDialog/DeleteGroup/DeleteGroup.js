@@ -22,6 +22,10 @@ class DeleteGroup extends Component {
         this.props.deleteGroup();
     }
 
+    componentDidMount() {
+        console.log('DELETE GROUPPPP');
+    }
+
     render() {
 
         return (

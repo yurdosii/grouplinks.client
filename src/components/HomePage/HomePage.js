@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import GroupList from './GroupList/GroupList';
 import CreateGroup from './CreateGroup/CreateGroup';
-import Button from '@material-ui/core/Button';
 
 import { API_URL, API_VERSION, SERVER_HOST } from 'constants/index';
 import classes from './HomePage.module.scss';
