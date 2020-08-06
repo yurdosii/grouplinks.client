@@ -23,7 +23,7 @@ class GroupItemDialog extends Component {
         }).then(res => {
             console.log(res);
 
-            this.handleClose();
+            this.props.handleClose();
             this.props.getData();
 
         }).catch(error => {
@@ -43,7 +43,7 @@ class GroupItemDialog extends Component {
             xsrfHeaderName: 'X-CSRFToken',
         }).then(res => {
             console.log(res);
-            this.props.getData();
+            this.props.getLinksData();
         }).catch(error => {
             console.log(error);
         })
@@ -57,8 +57,7 @@ class GroupItemDialog extends Component {
         }).then(res => {
             console.log(res);
 
-            this.handleClose();
-            this.props.getData();
+            this.props.getLinksData();
         }).catch(error => {
             console.log(error);
         })
@@ -88,7 +87,7 @@ class GroupItemDialog extends Component {
 
                 <DialogContent dividers={true}>
                     <LinkList
-                        links={this.props.item.links}
+                        links={this.props.links}
                         deleteLink={this.deleteLink}
                     />
                 </DialogContent>
