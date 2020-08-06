@@ -24,7 +24,7 @@ class DeleteGroupDialog extends Component {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         Are you sure you want to delete group '{this.props.item.name}'
-                            (links: {this.props.item.links.length}) ?
+                            (links wiil be also deleted) ?
                     </DialogContentText>
                 </DialogContent>
 

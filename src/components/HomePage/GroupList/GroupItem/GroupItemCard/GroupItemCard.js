@@ -25,7 +25,7 @@ class GroupItemCard extends Component {
                             {this.props.item.description}
                         </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
-                            Links: {this.props.item.links.length}
+                            Links: {this.props.linksLength}
                         </Typography>
                     </CardContent>
                 </CardActionArea>

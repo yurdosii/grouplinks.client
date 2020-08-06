@@ -10,15 +10,27 @@ import GroupItemDialog from './GroupItemDialog/GroupItemDialog';
 class GroupItem extends Component {
     state = {
         open: false,
-        // group: {
-        //     id: 0,
-        //     name: '',
-        //     description: '',
-        //     links: [],
-        // }
+        links: [],
+        linksLength: 0
+    }
+
+    getLinksData = () => {
+        axios.get(`${API_URL}/${API_VERSION}/groups/${this.props.item.id}/links`, {
+            withCredentials: true,
+        }).then(res => {
+            console.log(res);
+            const links = res.data;
+            this.setState({ links: links, linksLength: links.length })
+        }).catch(error => {
+            console.log(error);
+        })
     }
 
     handleClickOpen = () => {
+        if (!this.state.links.length && this.props.item.linksLength) {
+            this.getLinksData();
+        }
+
         this.setState({ open: true });
     };
 
@@ -27,24 +39,25 @@ class GroupItem extends Component {
     };
 
     componentDidMount() {
-        // this.setState({group: this.props.item}, () => {console.log(this.state);})
-        console.log(this.props.item);
+        this.setState({ linksLength: this.props.item.linksLength })
         console.log('GROUPITEMMMMM');
     }
 
     render() {
-
-        // if !this.state.links -> use this.props.linksNumber else this.state.links.length
         return (
             <div className={classes.group}>
                 <GroupItemCard
                     handleClickOpen={this.handleClickOpen}
                     item={this.props.item}
+                    linksLength={this.state.linksLength}
                 />
                 <GroupItemDialog
                     open={this.state.open}
                     handleClose={this.handleClose}
                     item={this.props.item}
+                    links={this.state.links}
+                    getData={this.props.getData}
+                    getLinksData={this.getLinksData}
                 />
             </div>
         );
